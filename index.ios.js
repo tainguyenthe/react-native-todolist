@@ -1,3 +1,4 @@
+import React from 'react'
 // This file is creating the redux and passing it our App container
 import { AppRegistry, View } from 'react-native'
 import { createStore } from 'redux'
@@ -10,6 +11,6 @@ const store = createStore(reducer)
 import App from './app/App'
 
 // Pass the store into the app container
-const AppWithStore = () => <App store={store}/>
+const AppWithStore = () => <App store={store} />
 
-AppRegistry.registerComponent('AwesomeProject', () => AppWithStore);
+AppRegistry.registerComponent('AwesomeProject', () => AppWithStore)

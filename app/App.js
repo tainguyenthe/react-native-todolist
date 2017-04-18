@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 
 import { actionCreators } from './reducer/todoListRedux'
-
 import List from './components/List'
 import Input from './components/Input'
 import Title from './components/Title'
