@@ -1,30 +1,41 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 
+import { actionCreators } from './reducer/todoListRedux'
+
 import List from './components/List'
 import Input from './components/Input'
 import Title from './components/Title'
 
 export default class App extends Component {
 
-  state = {
-    todos: ['Click to remove', 'Learn React Native', 'Write Code', 'Ship App'],
+  state = {}
+
+  componentWillMount() {
+    const { store } = this.props
+    const { todos } = store.getState()
+    this.setState({todos})
+
+    this.unsubscribe = store.subscribe(() => {
+      const { todos } = store.getState()
+      this.setState({todos})
+    })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   onAddTodo = (text) => {
-    const { todos } = this.state
+    const { store } = this.props
 
-    this.setState({
-      todos: [text, ...todos],
-    })
+    store.dispatch(actionCreators.add(text))
   }
 
   onRemoveTodo = (index) => {
-    const { todos } = this.state
+    const { store } = this.props
 
-    this.setState({
-      todos: todos.filter((todo, i) => i !== index),
-    })
+    store.dispatch(actionCreators.remove(index))
   }
 
   render() {
